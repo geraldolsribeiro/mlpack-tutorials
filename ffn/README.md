@@ -5,6 +5,7 @@ Carrega e transpõe os dados do arquivo CSV
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   Load( "foo.csv", data, THROW_EXCEPTION, TRANSPOSE_INPUT ); // 400 rows x 3 cols -> 3 rows x 400 cols
   cout << "Linhas:  " << data.n_rows << endl;                // 3
@@ -17,6 +18,7 @@ Recorta os dados de entrada para treinamento
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   auto firtsRow  = VAR1_ROW;
   auto firtsCol  = FIRST_COL;
@@ -31,6 +33,7 @@ Recorta os dados de saída para treinamento
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   firtsRow        = LABEL_ROW;
   lastRow         = LABEL_ROW;
@@ -43,6 +46,7 @@ Recorta os dados de entrada para teste
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   firtsRow     = VAR1_ROW;
   lastRow      = VAR2_ROW;
@@ -57,6 +61,7 @@ Recorta os dados de saída para teste
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   firtsRow       = LABEL_ROW;
   lastRow        = LABEL_ROW;
@@ -69,6 +74,7 @@ Dados de teste
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   cout << "Dados de entrada para teste: \n" << testdata << endl;
   cout << "Dados de saída para teste: \n" << testlabels << endl;
@@ -80,6 +86,7 @@ Constrói a rede
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   FFN<MeanSquaredError<>, RandomInitialization> model;
 
@@ -97,6 +104,7 @@ Primeira sessão de treinamento
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   for( int i = 0; i < 4; ++i ) {
     model.Train( traindata, trainlabels );
@@ -109,6 +117,7 @@ Testa o modelo ajustado
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   mat assignments;
   model.Predict( testdata, assignments );
@@ -122,6 +131,7 @@ Salvando modelo para continuar depois
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   Save( "model.xml", "model", model, false );
 ```
@@ -132,6 +142,7 @@ Carregando o modelo salvo na sessão anterior
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   Load( "model.xml", "model", model );
 ```
@@ -142,6 +153,7 @@ Nova sessão de treinamento para refinar
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   for( int i = 0; i < 4; ++i ) {
     model.Train( traindata, trainlabels );
@@ -154,6 +166,7 @@ Novos testes
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   model.Predict( testdata, assignments );
   cout << "Previsões:\n" << assignments << endl;
@@ -166,6 +179,7 @@ Salva o modelo aturalizado
 <details>
 <summary>Detalhes</summary>
 <p>
+
 ```c++
   Save( "model2.xml", "model", model, false );
 ```
