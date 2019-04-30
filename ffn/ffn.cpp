@@ -22,15 +22,15 @@ int main()
   // Matriz que conterá os dados de treinamento e de teste carregados do CSV
   mat data;
 
-  // Carrega e transpôe os dados
-  const auto THROW_EXCEPTION = true; // lança uma exceção std::runtime_error se não conseguir carregar. default false
-  const auto TRANSPOSE_INPUT = true; // transpôe a matriz depois de carregar. default true
-
   //-- Carrega e transpõe os dados do arquivo CSV
   //{{{
-  Load( "foo.csv", data, THROW_EXCEPTION, TRANSPOSE_INPUT ); // 400 rows x 3 cols -> 3 rows x 400 cols
-  cout << "Linhas:  " << data.n_rows << endl;                // 3
-  cout << "Colunas: " << data.n_cols << endl;                // 400
+  // lança uma exceção std::runtime_error se não conseguir carregar. default false
+  const auto THROW_EXCEPTION = true;
+  // transpôe a matriz depois de carregar. default true
+  const auto TRANSPOSE_INPUT = true;
+  Load( "foo.csv", data, THROW_EXCEPTION, TRANSPOSE_INPUT );
+  cout << "Linhas:  " << data.n_rows << endl; // 3
+  cout << "Colunas: " << data.n_cols << endl; // 400
   //}}}
 
   //-- Alias para os índices
@@ -40,7 +40,7 @@ int main()
   const auto LABEL_ROW = 2;
   const auto FIRST_COL = 0;
   const auto LAST_COL  = data.n_cols - 1;
-  const auto TEST_SIZE = 10;
+  const auto TEST_SIZE = 20;
   //}}}
 
   //-- Recorta os dados de entrada para treinamento
@@ -98,6 +98,12 @@ int main()
   //{{{
   for( int i = 0; i < 4; ++i ) {
     model.Train( traindata, trainlabels );
+
+    // Acompanha o erro do modelo
+    mat assignments;
+    model.Predict( testdata, assignments );
+    mat diff = assignments - testlabels;
+    cout << "Erro: " << diff * diff.t();
   }
   //}}}
 
