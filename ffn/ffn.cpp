@@ -1,5 +1,7 @@
 //-- ## Exemplo de utilização do mlpack
 //--
+//-- Inclusão de dependências
+//{{{
 #include <mlpack/core.hpp>
 #include <mlpack/methods/ann/ffn.hpp>
 #include <mlpack/methods/ann/layer/layer.hpp>
@@ -13,6 +15,7 @@ using namespace std;
 
 using mlpack::data::Load;
 using mlpack::data::Save;
+//}}}
 
 int main()
 {
@@ -30,12 +33,15 @@ int main()
   cout << "Colunas: " << data.n_cols << endl;                // 400
   //}}}
 
+  //-- Alias para os índices
+  //{{{
   const auto VAR1_ROW  = 0;
   const auto VAR2_ROW  = 1;
   const auto LABEL_ROW = 2;
   const auto FIRST_COL = 0;
   const auto LAST_COL  = data.n_cols - 1;
   const auto TEST_SIZE = 10;
+  //}}}
 
   //-- Recorta os dados de entrada para treinamento
   //{{{
@@ -77,8 +83,9 @@ int main()
 
   //-- Constrói a rede
   //{{{
+  // Feed Forward Network
+  // FFN< tipo de saída das camadas, regra de inicialização > model;
   FFN<MeanSquaredError<>, RandomInitialization> model;
-
   model.Add<Linear<>>( traindata.n_rows, 8 );
   model.Add<SigmoidLayer<>>();
   model.Add<Linear<>>( 8, 8 );

@@ -1,6 +1,29 @@
 [//]: <> (Documentação gerada com intmain_docmd)
 ## Exemplo de utilização do mlpack
 
+Inclusão de dependências
+<details>
+<summary>Detalhes</summary>
+<p>
+
+```c++
+#include <mlpack/core.hpp>
+#include <mlpack/methods/ann/ffn.hpp>
+#include <mlpack/methods/ann/layer/layer.hpp>
+#include <mlpack/methods/ann/loss_functions/mean_squared_error.hpp>
+
+using namespace mlpack;
+using namespace mlpack::ann;
+using namespace mlpack::optimization;
+using namespace arma;
+using namespace std;
+
+using mlpack::data::Load;
+using mlpack::data::Save;
+```
+
+</p>
+</details>
 Carrega e transpõe os dados do arquivo CSV
 <details>
 <summary>Detalhes</summary>
@@ -10,6 +33,22 @@ Carrega e transpõe os dados do arquivo CSV
   Load( "foo.csv", data, THROW_EXCEPTION, TRANSPOSE_INPUT ); // 400 rows x 3 cols -> 3 rows x 400 cols
   cout << "Linhas:  " << data.n_rows << endl;                // 3
   cout << "Colunas: " << data.n_cols << endl;                // 400
+```
+
+</p>
+</details>
+Alias para os índices
+<details>
+<summary>Detalhes</summary>
+<p>
+
+```c++
+  const auto VAR1_ROW  = 0;
+  const auto VAR2_ROW  = 1;
+  const auto LABEL_ROW = 2;
+  const auto FIRST_COL = 0;
+  const auto LAST_COL  = data.n_cols - 1;
+  const auto TEST_SIZE = 10;
 ```
 
 </p>

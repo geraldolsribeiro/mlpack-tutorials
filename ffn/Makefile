@@ -1,9 +1,9 @@
-all: mlp-mlpack
+all: ffn
 
-mlp-mlpack: mlp-mlpack.cpp
-	g++ mlp-mlpack.cpp -o mlp-mlpack -fopenmp -std=c++11 -larmadillo -lmlpack -lboost_serialization
+ffn: ffn.cpp
+	g++ $^ -o $@ -fopenmp -std=c++11 -larmadillo -lmlpack -lboost_serialization
 
-README.md: mlp-mlpack.cpp
+README.md: ffn.cpp
 	intmain_docmd c++ $^ $@
 
 plot:
