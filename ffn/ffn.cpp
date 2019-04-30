@@ -1,4 +1,4 @@
-//-- ## Exemplo de utilização do mlpack
+//-- ## Exemplo de Feed Forward Neural Network
 //--
 //-- Inclusão de dependências
 //{{{

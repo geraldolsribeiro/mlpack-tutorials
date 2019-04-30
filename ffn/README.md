@@ -1,5 +1,5 @@
 [//]: <> (Documentação gerada com intmain_docmd)
-## Exemplo de utilização do mlpack
+## Exemplo de Feed Forward Neural Network
 
 Inclusão de dependências
 <details>
@@ -127,8 +127,9 @@ Constrói a rede
 <p>
 
 ```c++
+  // Feed Forward Network
+  // FFN< tipo de saída das camadas, regra de inicialização > model;
   FFN<MeanSquaredError<>, RandomInitialization> model;
-
   model.Add<Linear<>>( traindata.n_rows, 8 );
   model.Add<SigmoidLayer<>>();
   model.Add<Linear<>>( 8, 8 );
